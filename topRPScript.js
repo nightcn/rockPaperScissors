@@ -81,3 +81,45 @@ function game() {
 }
 
  */
+
+/*
+function playerSelection(player = "computer") {
+    const arrAction = ['rock', 'paper', 'scissors']
+    check if player === "computer"
+        create var to pick a random selection (1 - rock, 2 - paper or 3 - scissors)
+        return player object {player: player, action: randAction}
+    else
+        prompt the player for his selection (1 - rock, 2 - paper or 3 - scissors)
+        get player name and his selection - lower case its selection
+        check his selection against array with the game action values ['rock', 'paper', 'scissors]
+        if not match prompt him for selection again (loop)
+        return player object {name: player, action: action}
+}
+ */
+
+function playerSelection(player = "bot") {
+  let playerObj = {};
+  const arrAction = ["rock", "paper", "scissors"];
+  let selection;
+
+  if (player === "bot") {
+    let randomSelection = Math.floor(Math.random() * 3);
+    selection = arrAction[randomSelection];
+    playerObj["name"] = player.toUpperCase();
+    playerObj["action"] = selection;
+  } else {
+    playerObj["name"] =
+      player.charAt(0).toUpperCase() + player.slice(1).toLowerCase();
+    let playerAction = +prompt(
+      `${playerObj["name"]} ,choose your action: 1 - rock, 2 - paper or 3 - scissors `
+    );
+    selection = arrAction[playerAction];
+
+    playerObj["action"] = selection || "Invalid selection";
+  }
+
+  return playerObj;
+}
+
+console.log(playerSelection("dErRRew")); // Test call - real player
+console.log(playerSelection()); // Test call - random action
