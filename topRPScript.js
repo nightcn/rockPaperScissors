@@ -192,7 +192,10 @@ function game() {
 
 // console.log(playRound(playerSelection("smith"), playerSelection()));
 
-console.log("Let's play a game of Rock, paper & scissors");
-let endGame = game()(endGame === "Tie")
-  ? console.log("It's a tie")
-  : console.log("The winner is: " + endGame);
+document.querySelector("button").addEventListener("click", (e) => {
+  console.log("Let's play a game of Rock, paper & scissors");
+  let endGame = game();
+  endGame === "Tie"
+    ? console.log("It's a tie")
+    : console.log("The winner is: " + endGame);
+});
