@@ -151,7 +151,48 @@ function playerSelection(player = "bot") {
   return playerObj;
 }
 
-console.log(playerSelection("dErRRew")); // Test call - real player
-console.log(playerSelection()); // Test call - random action
+function game() {
+  let playerName = prompt("Enter your name: ");
+  let rounds = +prompt("How many rounds do you want to play?");
 
-console.log(playRound(playerSelection("smith"), playerSelection()));
+  let score = {};
+  let round;
+
+  for (let i = 0; i < rounds; i++) {
+    round = playRound(playerSelection(playerName), playerSelection());
+    if (round[1] === "tie") {
+      console.log(round[0]);
+      continue;
+    } else if (!score[round[1]]) {
+      console.log(round[0]);
+      score[round[1]] = 1;
+    } else {
+      console.log(round[0]);
+      score[round[1]] += 1;
+    }
+  }
+
+  let objKeys = Object.keys(score);
+
+  if (score[objKeys[0]]) {
+    if (score[objKeys[1]] && score[objKeys[0]] > score[objKeys[1]]) {
+      return objKeys[0];
+    } else if (score[objKeys[1]] && score[objKeys[1]] > score[objKeys[0]]) {
+      return objKeys[1];
+    } else {
+      return objKeys[0];
+    }
+  } else {
+    return "Tie";
+  }
+}
+
+// console.log(playerSelection("dErRRew")); // Test call - real player
+// console.log(playerSelection()); // Test call - random action
+
+// console.log(playRound(playerSelection("smith"), playerSelection()));
+
+console.log("Let's play a game of Rock, paper & scissors");
+let endGame = game()(endGame === "Tie")
+  ? console.log("It's a tie")
+  : console.log("The winner is: " + endGame);
