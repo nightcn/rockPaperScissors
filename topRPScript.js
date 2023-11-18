@@ -82,20 +82,50 @@ function game() {
 
  */
 
-/*
-function playerSelection(player = "computer") {
-    const arrAction = ['rock', 'paper', 'scissors']
-    check if player === "computer"
-        create var to pick a random selection (1 - rock, 2 - paper or 3 - scissors)
-        return player object {player: player, action: randAction}
-    else
-        prompt the player for his selection (1 - rock, 2 - paper or 3 - scissors)
-        get player name and his selection - lower case its selection
-        check his selection against array with the game action values ['rock', 'paper', 'scissors]
-        if not match prompt him for selection again (loop)
-        return player object {name: player, action: action}
+function playRound(player1, player2) {
+  if (player1["action"] === player2["action"]) {
+    return ["It's a tie!", "tie"];
+  } else {
+    switch (player1["action"]) {
+      case "rock":
+        if (player2["action"] === "scissors") {
+          return [
+            `${player1["name"]} wins - ${player1["action"]} beats ${player2["action"]}(${player2["name"]})`,
+            player1["name"],
+          ];
+        } else {
+          return [
+            `${player2["name"]} wins - ${player2["action"]} beats ${player1["action"]}(${player1["name"]})`,
+            player2["name"],
+          ];
+        }
+      case "paper":
+        if (player2["action"] === "rock") {
+          return [
+            `${player1["name"]} wins - ${player1["action"]} beats ${player2["action"]}(${player2["name"]})`,
+            player1["name"],
+          ];
+        } else {
+          return [
+            `${player2["name"]} wins - ${player2["action"]} beats ${player1["action"]}(${player1["name"]})`,
+            player2["name"],
+          ];
+        }
+      case "scissors":
+        if (player2["action"] === "paper") {
+          return [
+            `${player1["name"]} wins - ${player1["action"]} beats ${player2["action"]}(${player2["name"]})`,
+            player1["name"],
+          ];
+        } else {
+          return [
+            `${player2["name"]} wins - ${player2["action"]} beats ${player1["action"]}(${player1["name"]})`,
+            player2["name"],
+          ];
+        }
+    }
+  }
 }
- */
 
 function playerSelection(player = "bot") {
   let playerObj = {};
@@ -113,7 +143,7 @@ function playerSelection(player = "bot") {
     let playerAction = +prompt(
       `${playerObj["name"]} ,choose your action: 1 - rock, 2 - paper or 3 - scissors `
     );
-    selection = arrAction[playerAction];
+    selection = arrAction[playerAction - 1];
 
     playerObj["action"] = selection || "Invalid selection";
   }
@@ -123,3 +153,5 @@ function playerSelection(player = "bot") {
 
 console.log(playerSelection("dErRRew")); // Test call - real player
 console.log(playerSelection()); // Test call - random action
+
+console.log(playRound(playerSelection("smith"), playerSelection()));
