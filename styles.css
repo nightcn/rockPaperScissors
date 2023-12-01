@@ -59,7 +59,13 @@ input {
   margin: 10vh auto;
   border: 2px solid black;
   display: none;
+  gap: 30px;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.announce {
+  width: 100%;
 }
 
 .console-wrapper {
