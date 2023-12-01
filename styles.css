@@ -53,12 +53,12 @@ input {
   border-bottom-left-radius: 25px;
 }
 
-.game-container {
+#game-container {
   font-family: Arial, Helvetica, sans-serif;
   max-width: 960px;
   margin: 10vh auto;
   border: 2px solid black;
-  display: flex;
+  display: none;
   justify-content: center;
 }
 

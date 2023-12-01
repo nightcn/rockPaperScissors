@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="RPSui.js" defer></script>
 </head>
 <body>
     <main class="container">
@@ -13,12 +14,12 @@
                 <img src="resources/images/rock-scissors-paper1.svg" alt="">
         </div>
         <input type="text" class="enter-name" placeholder="Name">
-        <button>PLAY!</button>
+        <button class="btnPlay">PLAY!</button>
     </main>
-    <main class="game-container">
+    <main id="game-container">
         <section class="console-wrapper">
             <div class="name-box">
-                <h2 class="name-tag">Name 1</h2>
+                <h2 class="name-tag player-name">Name 1</h2>
             </div>
             <div class="game-box">
                 <div class="points"><h1>0</h1></div>
