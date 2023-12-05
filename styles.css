@@ -103,6 +103,10 @@ input {
   height: 90px;
 }
 
+.game-action:disabled {
+  border: 2px solid blue;
+}
+
 /* Aux - Start */
 
 .highlight {
@@ -113,6 +117,10 @@ input {
 .score-alert {
   position: relative;
   z-index: 1;
+}
+
+.btnBot {
+  pointer-events: none;
 }
 
 /* Aux - End */

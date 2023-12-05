@@ -97,24 +97,34 @@ function updateScore(winner_or_tie, playerEl, botEl) {
   roundCount.textContent++;
   btnNewRound.disabled = false;
   if (winner_or_tie === "TIE") {
-    playerEl.textContent = "TIE";
-    botEl.textContent = "TIE";
-    console.log("Tie");
+    setTimeout(function () {
+      playerEl.style.pointerEvents = "all";
+      playerEl.textContent = "TIE";
+      botEl.textContent = "TIE";
+      console.log("Tie");
+      playerScore.textContent = playerObj.score;
+      botScore.textContent = botObj.score;
+    }, 3500);
   } else {
     winner_or_tie.score++;
     if (winner_or_tie.name === "BOT") {
       setTimeout(function () {
+        playerEl.style.pointerEvents = "all";
         playerEl.textContent = "LOSER";
         botEl.textContent = "WINNER";
+        playerScore.textContent = playerObj.score;
+        botScore.textContent = botObj.score;
       }, 3500);
     } else {
       setTimeout(function () {
+        playerEl.style.pointerEvents = "all";
         playerEl.textContent = "WINNER";
         botEl.textContent = "LOSER";
+        playerScore.textContent = playerObj.score;
+        botScore.textContent = botObj.score;
       }, 3500);
     }
-    playerScore.textContent = playerObj.score;
-    botScore.textContent = botObj.score;
+
     return winner_or_tie || "Tie!";
   }
 }
@@ -130,6 +140,7 @@ function highlightPick(element, actionPick) {
         gameAction.style.display = "none";
       }
     }
+    element.style.pointerEvents = "none";
     element.style.width = "100%";
     element.style.fontSize = "3rem";
   }
@@ -138,7 +149,7 @@ function highlightPick(element, actionPick) {
   }, 500);
   setTimeout(function () {
     clearInterval(intervalID);
-  }, 3001);
+  }, 3400);
 }
 
 function newRound() {
