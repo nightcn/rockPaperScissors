@@ -1,4 +1,5 @@
 const btnPlay = document.querySelector(".btnPlay");
+const playerName = document.querySelector(".enter-name");
 const mainContainer = document.querySelector(".container");
 const gameContainer = document.querySelector("#game-container");
 const playerNameTag = document.querySelector(".player-name");
@@ -7,23 +8,37 @@ const botScore = document.querySelector(".score-bot");
 const roundCount = document.querySelector(".round");
 const playButtons = document.querySelectorAll(".game-action");
 const btnNewRound = document.querySelector(".next-round");
+const btnNewGame = document.querySelector(".new-game");
 
 const playerObj = {};
-const botObj = { name: "BOT" };
+const botObj = {};
 let winner = "";
 let round = 0;
 
+function newGame(e) {
+  mainContainer.style.display = "flex";
+  gameContainer.style.display = "none";
+  playerName.value = "";
+
+  for (const key in playerObj) {
+    delete playerObj[key];
+  }
+  for (const key in botObj) {
+    delete botObj[key];
+  }
+}
+
 function initGame(e) {
-  if (document.querySelector(".enter-name").value) {
-    playerNameTag.textContent = document.querySelector(".enter-name").value;
+  if (playerName.value) {
+    playerNameTag.textContent = playerName.value;
   } else {
     playerNameTag.textContent = "Player 1";
   }
 
-  round = 1;
   playerObj.name = playerNameTag.textContent;
-  playerObj.score = 0;
+  botObj.name = "BOT";
 
+  playerObj.score = 0;
   botObj.score = 0;
 
   btnNewRound.disabled = true;
@@ -31,7 +46,9 @@ function initGame(e) {
   document.location.hash = "#game-container";
   mainContainer.style.display = "none";
   gameContainer.style.display = "flex";
-  //   console.log(e.target.classList[1]);
+  botScore.textContent = 0;
+  playerScore.textContent = 0;
+  newRound();
 }
 
 function botMove() {
@@ -94,8 +111,6 @@ function playRound(player1, player2) {
 }
 
 function updateScore(winner_or_tie, playerEl, botEl) {
-  roundCount.textContent++;
-  btnNewRound.disabled = false;
   if (winner_or_tie === "TIE") {
     setTimeout(function () {
       playerEl.style.pointerEvents = "all";
@@ -104,6 +119,7 @@ function updateScore(winner_or_tie, playerEl, botEl) {
       console.log("Tie");
       playerScore.textContent = playerObj.score;
       botScore.textContent = botObj.score;
+      btnNewRound.disabled = false;
     }, 3500);
   } else {
     winner_or_tie.score++;
@@ -114,6 +130,7 @@ function updateScore(winner_or_tie, playerEl, botEl) {
         botEl.textContent = "WINNER";
         playerScore.textContent = playerObj.score;
         botScore.textContent = botObj.score;
+        btnNewRound.disabled = false;
       }, 3500);
     } else {
       setTimeout(function () {
@@ -122,6 +139,7 @@ function updateScore(winner_or_tie, playerEl, botEl) {
         botEl.textContent = "LOSER";
         playerScore.textContent = playerObj.score;
         botScore.textContent = botObj.score;
+        btnNewRound.disabled = false;
       }, 3500);
     }
 
@@ -153,24 +171,25 @@ function highlightPick(element, actionPick) {
 }
 
 function newRound() {
+  roundCount.textContent++;
   if (roundCount.textContent > 1) {
-    btnNewRound.disabled = !btnNewRound.disabled;
-    document.querySelectorAll(".game-action").forEach(function (e) {
-      if (e.classList.contains("btnBot")) {
-        e.textContent = "Waiting...";
-        e.style.fontSize = "1rem";
-        e.style.width = "90px";
-        e.classList.remove("highlight");
-      } else {
-        e.style.width = "90px";
-        e.style.display = "block";
-        e.style.fontSize = "1rem";
-        e.classList.remove("highlight");
-        e.textContent =
-          e.classList[1].slice(0, 1).toUpperCase() + e.classList[1].slice(1);
-      }
-    });
+    btnNewRound.disabled = true;
   }
+  document.querySelectorAll(".game-action").forEach(function (e) {
+    if (e.classList.contains("btnBot")) {
+      e.textContent = "Waiting...";
+      e.style.fontSize = "1rem";
+      e.style.width = "90px";
+      e.classList.remove("highlight");
+    } else {
+      e.style.width = "90px";
+      e.style.display = "block";
+      e.style.fontSize = "1rem";
+      e.classList.remove("highlight");
+      e.textContent =
+        e.classList[1].slice(0, 1).toUpperCase() + e.classList[1].slice(1);
+    }
+  });
 }
 
 btnPlay.addEventListener("click", initGame);
@@ -178,3 +197,4 @@ playButtons.forEach(function (action) {
   action.addEventListener("click", playMove);
 });
 btnNewRound.addEventListener("click", newRound);
+btnNewGame.addEventListener("click", newGame);
