@@ -9,13 +9,29 @@ const roundCount = document.querySelector(".round");
 const playButtons = document.querySelectorAll(".game-action");
 const btnNewRound = document.querySelector(".next-round");
 const btnNewGame = document.querySelector(".new-game");
+const modalBox = document.querySelector("#modalBox");
+const btnModalNewGame = document.querySelector(".modalNewGame");
+const btnModalPlayAgain = document.querySelector(".modalPlayAgain");
 
 const playerObj = {};
 const botObj = {};
 let winner = "";
 let round = 0;
 
-function newGame(e) {
+function playAgain() {
+  playerObj.score = 0;
+  botObj.score = 0;
+  round = 0;
+
+  btnNewRound.disabled = true;
+  roundCount.textContent = round;
+  botScore.textContent = 0;
+  playerScore.textContent = 0;
+  modalBox.style.display = "none";
+  newRound();
+}
+
+function newGame() {
   mainContainer.style.display = "flex";
   gameContainer.style.display = "none";
   playerName.value = "";
@@ -131,6 +147,10 @@ function updateScore(winner_or_tie, playerEl, botEl) {
         playerScore.textContent = playerObj.score;
         botScore.textContent = botObj.score;
         btnNewRound.disabled = false;
+        if (winner_or_tie.score === 5) {
+          modalBox.style.display = "block";
+          modalBox.querySelector(".winner").textContent = "BOT";
+        }
       }, 3500);
     } else {
       setTimeout(function () {
@@ -140,6 +160,10 @@ function updateScore(winner_or_tie, playerEl, botEl) {
         playerScore.textContent = playerObj.score;
         botScore.textContent = botObj.score;
         btnNewRound.disabled = false;
+        if (winner_or_tie.score === 5) {
+          modalBox.style.display = "block";
+          modalBox.querySelector(".winner").textContent = playerObj.name;
+        }
       }, 3500);
     }
 
@@ -198,3 +222,8 @@ playButtons.forEach(function (action) {
 });
 btnNewRound.addEventListener("click", newRound);
 btnNewGame.addEventListener("click", newGame);
+btnModalNewGame.addEventListener("click", function (e) {
+  modalBox.style.display = "none";
+  newGame();
+});
+btnModalPlayAgain.addEventListener("click", playAgain);
