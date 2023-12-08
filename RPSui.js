@@ -12,6 +12,7 @@ const btnNewGame = document.querySelector(".new-game");
 const modalBox = document.querySelector("#modalBox");
 const btnModalNewGame = document.querySelector(".modalNewGame");
 const btnModalPlayAgain = document.querySelector(".modalPlayAgain");
+const btnModalClose = document.querySelector(".close");
 
 const playerObj = {};
 const botObj = {};
@@ -216,6 +217,11 @@ function newRound() {
   });
 }
 
+playerName.addEventListener("keydown", function (e) {
+  if (e.keyCode === 13) {
+    initGame();
+  }
+});
 btnPlay.addEventListener("click", initGame);
 playButtons.forEach(function (action) {
   action.addEventListener("click", playMove);
@@ -223,6 +229,12 @@ playButtons.forEach(function (action) {
 btnNewRound.addEventListener("click", newRound);
 btnNewGame.addEventListener("click", newGame);
 btnModalNewGame.addEventListener("click", function (e) {
+  modalBox.style.display = "none";
+  newGame();
+});
+btnModalPlayAgain.addEventListener("click", playAgain);
+
+btnModalClose.addEventListener("click", function (e) {
   modalBox.style.display = "none";
   newGame();
 });

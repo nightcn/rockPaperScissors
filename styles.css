@@ -157,12 +157,36 @@ header {
   border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
   text-align: center;
+  border: 10px solid rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
 }
 
 .modal-content p {
+  font-size: 1.5rem;
   padding-top: 15px;
 }
+.modal-content button {
+  margin-top: 40px;
+  padding: 6px 18px;
+  font-size: 1rem;
+}
 
+.modalNewGame {
+  margin-right: 15px;
+}
+.modalNewGame:hover,
+.modalNewGame:focus {
+  color: darkgray;
+}
+
+.modalPlayAgain {
+  margin-left: 15px;
+}
+
+.modalPlayAgain:hover,
+.modalPlayAgain:focus {
+  color: darkgray;
+}
 /* The Close Button */
 .close {
   display: inline;
